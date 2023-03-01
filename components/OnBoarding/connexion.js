@@ -3,13 +3,11 @@ import {
   StyleSheet,
   Text,
   View,
-  Back,
   SafeAreaView,
-  Image,
-  ScrollView,
   TextInput,
   TouchableOpacity,
   Alert,
+  ImageBackground,
 } from "react-native";
 import { useEffect, useState } from "react";
 
@@ -23,61 +21,124 @@ function Connexion({ navigation }) {
   }, [login, email, password]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#77B5FE" }}>
-      <View
-        style={{ flex: 0.5, alignItems: "center", justifyContent: "center" }}>
-        <Text
-          style={{
-            color: "white",
-            fontWeight: "bold",
-            fontSize: 30,
-            textAlign: "center",
-          }}>
-          Bienvenue dans votre application météo
-        </Text>
-      </View>
-      <View style={{ flex: 0.8, justifyContent: "center" }}>
-        <TextInput
-          placeholder={"email"}
-          onChangeText={(text) => setEmail(text)}
-          style={{
-            borderWidth: 1,
-            borderRadius: 10,
-            height: 40,
-            marginBottom: 20,
-            marginHorizontal: 20,
-            borderColor: "white",
-            paddingLeft: 10,
-          }}
-        />
-        <TextInput
-          placeholder={"password"}
-          style={{
-            borderWidth: 1,
-            borderRadius: 10,
-            height: 40,
-            marginHorizontal: 20,
-            borderColor: "white",
-            paddingLeft: 10,
-          }}
-          onChangeText={(text) => setPassword(text)}
-        />
-      </View>
-      <View style={{ flex: 0.5, alignItems: "center" }}>
-        <TouchableOpacity
-          onPress={() => {
-            if (email != null && password != null) {
-              setLogin(true);
-              navigation.navigate("Nav");
-            } else {
-              Alert.alert("Erreur", "email ou mdp incorrects");
-            }
-          }}
-          style={{ backgroundColor: "orange", padding: 10, borderRadius: 20 }}>
-          <Text style={{ color: "white", fontWeight: "bold" }}>Valider</Text>
-        </TouchableOpacity>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <ImageBackground source={require('../../assets/WTMimg.png')} resizeMode="cover" style={styles.image}>
+        <View style={styles.textContainer}>
+          <Text style={styles.titleText}>WEB</Text>
+          <Text style={styles.titleText}>TIME</Text>
+          <Text style={styles.titleText}>MACHINE</Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <View style={styles.inputForm}></View>
+          <TextInput
+            placeholder={"E-mail : martymcfly@gmail.com"}
+            style={styles.inputA}
+            placeholderTextColor="white"
+            onChangeText={(text) => setEmail(text)}
+          />
+          <TextInput
+            placeholder={"Mot de passe : JenniferJTM"}
+            style={styles.inputB}
+            placeholderTextColor="white"
+            onChangeText={(text) => setPassword(text)}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              if (email != null && password != null) {
+                setLogin(true);
+                navigation.navigate("Acceuil");
+              } else {
+                Alert.alert("Erreur", "email ou mdp incorrects");
+              }
+            }}
+            style={styles.button}>
+            <Text style={styles.textButton}>Valider</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  image:{
+flex: 1,
+  },
+textContainer : {
+flex: 3,
+justifyContent: "center",
+alignItems: "center",
+flexDirection:"column",
+},
+titleText : {
+  color: "white",
+  fontWeight: "bold",
+  fontSize: 50,
+  textAlign: "center",
+  textShadowColor: 'rgba(0, 0, 0, 0.90)',
+  textShadowOffset: {width: -1, height: 1},
+  textShadowRadius: 10,
+},
+inputContainer: {
+flex : 2,
+justifyContent: "center",
+},
+inputForm: {
+flexDirection:"column",
+justifyContent:"center",
+alignItems:"center", 
+},
+inputA:{
+  borderWidth: 3,
+  borderRadius: 10,
+  height: 50,
+  marginHorizontal: 25,
+  borderColor: "white",
+  paddingLeft: 10,
+  margin:15, 
+  backgroundColor: 'rgba(52, 52, 52, 0.8)',
+  color :"white", 
+},
+inputB:{
+  borderWidth: 3,
+  borderRadius: 10,
+  height: 50,
+  marginHorizontal: 25,
+  borderColor: "white",
+  paddingLeft: 10,
+  backgroundColor: 'rgba(52, 52, 52, 0.8)',
+  color:"white",
+},
+buttonContainer: {
+flex: 3,
+justifyContent: "center",
+flexDirection:"column",
+},
+button:{
+    display: 'flex',
+    height: 50,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 60,
+    backgroundColor: '#f500b2',
+    shadowColor: '#5b0021',
+    shadowOpacity: 0.8,
+    shadowOffset: { height: 4, width: -2 },
+    shadowRadius: 1,
+},
+textButton: {
+  fontSize: 16,
+  textTransform: 'uppercase',
+  fontWeight:"bold",
+  color: '#FFFFFF',
+},
+
+
+});
 export default Connexion;

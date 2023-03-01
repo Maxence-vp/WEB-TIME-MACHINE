@@ -1,15 +1,7 @@
 import {
-  StyleSheet,
   Text,
   View,
-  Back,
-  SafeAreaView,
-  Image,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
 } from "react-native";
-import { useEffect, useState } from "react";
 
 function Settings() {
   return (

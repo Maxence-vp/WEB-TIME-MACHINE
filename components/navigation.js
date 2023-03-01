@@ -1,26 +1,14 @@
-import * as Location from "expo-location";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Back,
-  SafeAreaView,
-  Image,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
-import { useEffect, useState } from "react";
+import { View, } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-// import composants
-import Meteo from "./meteo/meteo";
+import research from "./research/Research";
 import Settings from "./settings/Settings";
+import Preview from "./preview/Preview";
 
 const Tab = createBottomTabNavigator();
 
-function Nav() {
+function Acceuil() {
   return (
     <View style={{ flex: 1 }}>
       <Tab.Navigator
@@ -28,33 +16,36 @@ function Nav() {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === "home") {
-              iconName = focused
-                ? "ios-information-circle"
-                : "ios-information-circle";
-            } else if (route.name === "settings") {
-              iconName = focused ? "ios-list" : "ios-list";
+            if (route.name === "Recherche") {
+              iconName = focused ? "search" : "search";
+            } else if (route.name === "Paramètres") {
+              iconName = focused ? "ios-settings-outline" : "ios-settings-outline";
             }
 
-            // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "tomato",
+          tabBarActiveTintColor: "blue",
           tabBarInactiveTintColor: "gray",
         })}>
         <Tab.Screen
           options={{ headerShown: false }}
-          name="home"
-          component={Meteo}
+          name="Recherche"
+          component={research}
         />
 
         <Tab.Screen
           options={{ headerShown: false }}
-          name="settings"
+          name="Résultat de recherche"
+          component={Preview}
+        />
+
+        <Tab.Screen
+          options={{ headerShown: false }}
+          name="Paramètres"
           component={Settings}
         />
       </Tab.Navigator>
     </View>
   );
 }
-export default Nav;
+export default Acceuil;
